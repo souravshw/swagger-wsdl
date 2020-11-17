@@ -1,0 +1,2106 @@
+{
+	"swagger": "2.0",
+	"host": "plus.dnb.com",
+	"schemes": [
+		"https"
+	],
+	"info": {
+		"description": "Company Profile, Linkage, and Executives provides details on the company profile, executive team members, latitude and longitude, URL, stock ticker, and sales trends.\r\n\r\nData Coverage: Global, though limited data for China due to recent regulatory changes and response time for China transactions will be slower.",
+		"title": "Company Profile, Linkage, and Executives (cmpelk) v2",
+		"version": "2"
+	},
+	"basePath": "/",
+	"paths": {
+		"/v1/data/duns/{dunsNumber}": {
+			"x-DNB-Name": "Company Profile, Linkage, and Executives (cmpelk) v2",
+			"x-DNB-ID": "cmpelkv2",
+			"get": {
+				"description": "Company Profile, Linkage, and Executives provides details on the company profile, executive team members, latitude and longitude, URL, stock ticker, and sales trends.\r\n\r\nData Coverage: Global, though limited data for China due to recent regulatory changes and response time for China transactions will be slower.",
+				"summary": "Endpoint",
+				"operationId": "cmpelkv2",
+				"tags": [
+					"cmpelk"
+				],
+				"produces": [
+					"application/json;charset=utf-8"
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"description": "",
+							"type": "object",
+							"properties": {
+								"transactionDetail": {
+									"type": "object",
+									"description": "The information used to process this request.",
+									"properties": {
+										"transactionID": {
+											"description": "A value assigned by the Dun & Bradstreet application to uniquely identify this request.",
+											"type": "string",
+											"example": "rlh-hi9puyoijk-jop8u-kd-d-1"
+										},
+										"transactionTimestamp": {
+											"description": "The date and time, in ISO 8601 UTC Z standard, when this response was created.",
+											"type": "string",
+											"example": "2017-02-21T17:46:19.839Z"
+										},
+										"inLanguage": {
+											"description": "An IETF BCP 47 code value that defines the language in which this product was rendered.",
+											"type": "string",
+											"example": "en-US"
+										},
+										"productID": {
+											"description": "The ID of the product used to create the response.",
+											"type": "string",
+											"example": "PRODID"
+										},
+										"productVersion": {
+											"description": "The version of the product used to create the response.",
+											"type": "string",
+											"example": 1
+										}
+									},
+									"additionalProperties": true
+								},
+								"inquiryDetail": {
+									"type": "object",
+									"description": "The criteria used to process this request.",
+									"properties": {
+										"duns": {
+											"type": "string",
+											"example": 804735132,
+											"description": "The D-U-N-S number provided in the request."
+										},
+										"productID": {
+											"type": "string",
+											"example": "PRODID",
+											"description": "The ID of the product used to produce the response."
+										},
+										"productVersion": {
+											"type": "string",
+											"example": "v1",
+											"description": "The product version number provided in the request."
+										},
+										"tradeUp": {
+											"type": "string",
+											"example": "hq",
+											"description": "The value of the tradeUp parameter provided in the request."
+										},
+										"customerReference": {
+											"type": "string",
+											"example": "Some text to describe the request.",
+											"description": "A reference string provided by the customer for this particular transaction."
+										}
+									},
+									"additionalProperties": true
+								},
+								"organization": {
+									"type": "object",
+									"additionalProperties": true,
+									"description": "The details of the entity.",
+									"properties": {
+										"duns": {
+											"type": "string",
+											"example": 804735132,
+											"description": "The D-U-N-S Number, assigned by Dun & Bradstreet, is an identification number that uniquely identifies the entity in accordance with the Data Universal Numbering System (D-U-N-S)."
+										},
+										"dunsControlStatus": {
+											"type": "object",
+											"description": "The details of the entity established to provide products and/or services in the marketplace or to the community.",
+											"properties": {
+												"operatingStatus": {
+													"type": "object",
+													"description": "The high level categorization of the entity's functional state or trading status.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "Active",
+															"description": "The entity's functional state or trading status summarized into either active or out of business."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 9074,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the entity's functional state or trading status.<br/>Possible values:<br/>9074 [Active]<br/>403 [Out of Business]"
+														}
+													},
+													"additionalProperties": true
+												},
+												"isMarketable": {
+													"type": "boolean",
+													"example": true,
+													"description": "Indicates whether the data on the entity satisfies Dun & Bradstreet's marketability rules for Sales & Marketing Solutions products. <br/><br/>- If true, the entity data satisfies the marketability rules.<br/>- If false, the entity data does not satisfy the marketability rules."
+												},
+												"isMailUndeliverable": {
+													"type": "boolean",
+													"example": false,
+													"description": "Indicates whether it is possible to deliver mail to the address of this entity.\r<br/>\r<br/>- If true, it is not possible to deliver mail to at least one of the addresses listed for this DUNS (Primary, Mailing or Registered).<br/>- If false, it is possible to deliver mail to the address."
+												},
+												"isTelephoneDisconnected": {
+													"type": "boolean",
+													"example": false,
+													"description": "Indicates whether the telephone number can be connected to successfully.<br/><br/>- If true, connection to the  telephone number is unsuccessful.<br/>- If false, connection to the  telephone number is successful."
+												},
+												"isDelisted": {
+													"type": "boolean",
+													"example": false,
+													"description": "Indicates whether the entity has requested that they not be included in any Direct marketing lists (e.g., mailing, telephone).<br/><br/>- If true, the entity has objected to and MUST NOT receive direct marketing material.<br/>- If false, the entity has not objected to receiving direct marketing material."
+												},
+												"subjectHandlingDetails": {
+													"type": "array",
+													"description": "The details of the manner in which the entity is to receive special care being contacted. In many cases, this was specifically requested by the entity.",
+													"items": {
+														"properties": {
+															"description": {
+																"type": "string",
+																"example": "Do not call",
+																"description": "The manner in which the entity is to receive special care when being contacted (e.g., do not call or do not send information requests). In many cases, this was specifically requested by the entity."
+															},
+															"dnbCode": {
+																"type": "integer",
+																"example": 7974,
+																"description": "A unique code assigned by Dun & Bradstreet to identify the manner in which the entity is to receive special care from Dun & Bradstreet when it is being contacted.<br/>Refer to Reference code table \"199 [Subject Handling]\" for all possible values."
+															}
+														},
+														"additionalProperties": true,
+														"type": "object"
+													}
+												},
+												"fullReportDate": {
+													"type": "string",
+													"example": "2017-01-30",
+													"description": "The most recent date when a complete review of all business information data was completed.<br/><br/>Format: YYYY-MM-DD or YYYY-MM"
+												}
+											},
+											"additionalProperties": true
+										},
+										"primaryName": {
+											"type": "string",
+											"example": "GORMAN MANUFACTURING COMPANY, INC.",
+											"description": "The single name by which the entity is primarily known or identified."
+										},
+										"tradeStyleNames": {
+											"type": "array",
+											"description": "The details of the names that the entity trades under for commercial purposes although its registered legal name used for contracts and other formal situations may be another name.",
+											"items": {
+												"properties": {
+													"name": {
+														"type": "string",
+														"example": "Alternate Company Name",
+														"description": "The name that the entity trades under for commercial purposes  although its registered legal name used for contracts and other formal situations may be another name."
+													},
+													"priority": {
+														"type": "integer",
+														"example": 1,
+														"description": "The sequence in which the entity mostly uses this tradestyle name."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"websiteAddress": {
+											"type": "array",
+											"description": "The details of the internet URLs used for online information and communication with the entity.          <br/><br/><br/>                                                                                                           <br/>Note: Website address information is not returned right now.",
+											"items": {
+												"properties": {
+													"url": {
+														"type": "string",
+														"example": "http://www.gorman.com",
+														"description": "The Internet URL (Uniform Resource Locator) that uniquely identifies the proprietary website of the entity or the website preferred by the entity that gives more information on the entity."
+													},
+													"domainName": {
+														"type": "string",
+														"example": "gorman.com",
+														"description": "A unique name used to identify the website of the entity that serves as an address to access that website."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"telephone": {
+											"type": "array",
+											"description": "The details of the telephone information used for voice communication with the entity.",
+											"items": {
+												"properties": {
+													"telephoneNumber": {
+														"type": "string",
+														"example": 6505550000,
+														"description": "A sequence of digits used for voice communication with the entity.<br/>This sequence of digits includes the area code or city code and domestic dialing code."
+													},
+													"isdCode": {
+														"type": "string",
+														"example": 1,
+														"description": "The country calling code assigned by the International Telecommunication Union (ITU) required to connect to this telephone number when dialing from outside the entity's country (e.g., '1' for the US, '44' for the UK, '91' for India)."
+													},
+													"isUnreachable": {
+														"type": "boolean",
+														"example": false,
+														"description": "Indicates whether the telephone number can be connected to successfully.<br/><br/>- If true, connection to the  telephone number is unsuccessful.<br/>- If false, connection to the  telephone number is successful."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"fax": {
+											"type": "array",
+											"description": "The details of the facsimile information used for data communication with the entity.",
+											"items": {
+												"properties": {
+													"faxNumber": {
+														"type": "string",
+														"example": 6505550001,
+														"description": "A sequence of digits used for facsimile communication with the entity.<br/>This sequence of digits includes the area code or city code and domestic dialing code."
+													},
+													"isdCode": {
+														"type": "string",
+														"example": 1,
+														"description": "The country calling code assigned by the International Telecommunication Union (ITU) required to connect to this facsimile number when dialing from outside the entity's country (e.g., '1' for the US, '44' for the UK, '91' for India)."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"primaryAddress": {
+											"type": "object",
+											"description": "The details of the single primary or physical address at which the entity is located.",
+											"properties": {
+												"language": {
+													"type": "object",
+													"description": "The details of the language in which this address was recorded.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "English",
+															"description": "The name of the language in which this address was recorded."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 39,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the language in which this address was recorded.<br/>Refer to Reference code table \"3 [Language]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressCountry": {
+													"type": "object",
+													"description": "The details of the country/market in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "United States",
+															"description": "The name of the country/market in which this address is located."
+														},
+														"isoAlpha2Code": {
+															"type": "string",
+															"example": "US",
+															"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country/market in which this address is located."
+														},
+														"fipsCode": {
+															"type": "string",
+															"example": "US",
+															"description": "The Federal Information Processing Standards (FIPS) code value that identifies the country/market in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"continentalRegion": {
+													"type": "object",
+													"description": "The details of the continental region in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "North America",
+															"description": "The name of the continental region for this address.<br/><br/>Possible values:<br/>- Africa<br/>- Asia Pacific<br/>- Europe<br/>- Latin America<br/>- Middle East<br/>- North America"
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressLocality": {
+													"type": "object",
+													"description": "The details of the city, town, township, village, borough, etc. in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "SAN FRANCISCO",
+															"description": "The name of the city, town, township, village, borough, etc. in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"minorTownName": {
+													"type": "string",
+													"example": "Booker",
+													"description": "The name of the village, town or suburb when it is not a Primary Town or City (e.g., the Booker in Booker, High Wycombe)."
+												},
+												"addressRegion": {
+													"type": "object",
+													"description": "The details of the locally governed area that forms part of a centrally governed nation to identify where this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "California",
+															"description": "The name of the locally governed area that forms part of a centrally governed nation to identify where this address is located."
+														},
+														"abbreviatedName": {
+															"type": "string",
+															"example": "CA",
+															"description": "The shortened name of the locally governed area that forms part of a centrally governed nation. For example 'NJ' for the US State New Jersey within Country United States.<br/><br/>Note: The abbreviation does not always correspond to the ISO representation and can vary between countries based on data collection."
+														},
+														"fipsCode": {
+															"type": "string",
+															"example": "06",
+															"description": "The Federal Information Processing Standards (FIPS) code value that identifies the region in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressCounty": {
+													"type": "object",
+													"description": "The details of the county in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "SAN MATEO",
+															"description": "The name of the county in which this address is located."
+														},
+														"fipsCode": {
+															"type": "string",
+															"example": 81,
+															"description": "The Federal Information Processing Standards (FIPS) code value that identifies the county in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"postalCode": {
+													"type": "string",
+													"example": 941109999,
+													"description": "An identifier used by the local country's postal authority to identify where this address is located."
+												},
+												"postalCodePosition": {
+													"type": "object",
+													"description": "The details of the position of the Postal Code when presenting the address.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "Post code presented before Town/City name",
+															"description": "The position of the Postal Code when presenting the address (e.g., before the Primary Town/City)."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 1009,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the position of the Postal Code when presenting the address.<br/>Refer to Reference code table \"210 [Postal Code Position]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"streetNumber": {
+													"type": "string",
+													"example": 492,
+													"description": "The number part of the street address where the entity is located. <br/><br/>This may be a single number, a number with an appendix, or a range of street numbers. <br/><br/>For example, the &quot;51 - 59C&quot; in the address 51 - 59C Wall Street."
+												},
+												"streetName": {
+													"type": "string",
+													"example": "KOLLER ST",
+													"description": "The name of the street where the entity is located. <br/><br/>For example, &quot;Wall Street&quot; in the address 51 - 59C Wall Street."
+												},
+												"streetAddress": {
+													"type": "object",
+													"description": "The details of the street address where the entity is located.",
+													"properties": {
+														"line1": {
+															"type": "string",
+															"example": "492 KOLLER ST",
+															"description": "The first line of the address where the entity is located.<br/><br/>For example, &quot;41 Central Chambers&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+														},
+														"line2": {
+															"type": "string",
+															"example": "Suite 100",
+															"description": "The second line of the address where the entity is located.<br/><br/>For example, &quot;Dame Court&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+														}
+													},
+													"additionalProperties": true
+												},
+												"postOfficeBox": {
+													"type": "object",
+													"description": "The details of the identifier issued to the entity by a private or public Postal Office for the purposes of collecting mail for the entity for subsequent collection or delivery.",
+													"properties": {
+														"postOfficeBoxNumber": {
+															"type": "string",
+															"example": 5309,
+															"description": "An identifier issued to the entity by a private or public postal office for the purposes of collecting mail for the entity for subsequent collection or delivery.<br/><br/>This includes only the identifying number (or text) and not the textual description of the PO Box type. For example the contents would be just the number 12 from &quot;PO Box 12&quot;, or just the number 57 from &quot;PMB 57&quot;."
+														},
+														"typeDescription": {
+															"type": "string",
+															"example": "Supplied by public Post Office authority",
+															"description": "The type of the PO Box (e.g., Post Office Box, PMB)."
+														},
+														"typeDnBCode": {
+															"type": "integer",
+															"example": 120,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the type of PO Box.<br/>Refer to Reference code table \"208 [Postal Box Type]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"latitude": {
+													"type": "number",
+													"example": 37.777709,
+													"description": "The latitude component of the entity's location defined as the angular distance of the primary physical address north or south from the Earth's equator expressed in decimal numbers. <br/><br/>Positive numbers indicate degrees north. Negative numbers indicate degrees south."
+												},
+												"longitude": {
+													"type": "number",
+													"example": -122.404624,
+													"description": "The longitude component of the entity's location defined as the angular distance of the primary physical address east or west from an imaginary line (called the prime meridian) that goes from the North Pole to the South Pole expressed in decimal numbers. <br/><br/>Positive numbers indicate degrees east. Negative numbers indicate degrees west."
+												},
+												"geographicalPrecision": {
+													"type": "object",
+													"description": "The details on how close the latitude and longitude coordinates for a location are to â€œrooftopâ€� level.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "Street Segment Centroid",
+															"description": "The description of how close the latitude and longitude coordinates for a location are to â€œrooftopâ€� level."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 30256,
+															"description": "A unique code assigned by Dun & Bradstreet to identify how close the latitude and longitude coordinates for a location are to &quot;rooftop&quot; level.<br/>Refer to Reference code table \"231 [Geographical Precision]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"isRegisteredAddress": {
+													"type": "boolean",
+													"example": true,
+													"description": "Indicates if the primary address is the same as the address of the entity as registered with a legal entity.  <br/>  <br/>- If true, the primary address is the same as the address of the entity as registered with a legal entity.<br/>- If false, the primary address is the not same as the address of the entity as registered with a legal entity."
+												},
+												"isResidentialAddress": {
+													"type": "boolean",
+													"example": false,
+													"description": "Indicates whether or not the Primary Address is classified as residential by the governing postal authority<br/><br/>- If true, the primary address is classified as residential.<br/>- If false, the primary address is not classified as residential."
+												},
+												"statisticalArea": {
+													"type": "object",
+													"description": "The details of the various statistical facts associated with this address.",
+													"properties": {
+														"cbsaName": {
+															"type": "string",
+															"example": "San Francisco-Oakland-Hayward CA",
+															"description": "The name assigned to the 5-digit CBSA (Core Based Statistical Area) assigned by US Census board to denote a geographical region with a relatively high population density at its core and close economic ties throughout the area."
+														},
+														"cbsaCode": {
+															"type": "string",
+															"example": 41860,
+															"description": "The 5-digit CBSA (Core Based Statistical Area) code assigned by US Census board to denote a geographical region with a relatively high population density at its core and close economic ties throughout the area."
+														},
+														"economicAreaOfInfluenceCode": {
+															"type": "string",
+															"example": 146,
+															"description": "A code assigned by the U.S Bureau of Economic Analysis to identify the entity's regional market that surrounds a metropolitan or micropolitan statistical area serving as a regional center of economic activity."
+														},
+														"populationRank": {
+															"type": "object",
+															"description": "The details of the statistical facts about population based on region's rank.",
+															"properties": {
+																"rankNumber": {
+																	"type": "string",
+																	"example": 9,
+																	"description": "A number classifying the geographic area in which the entity is located based on the resident population.<br/><br/>Values: 0 to 9<br/>0 denotes the lowest population range; 9 denotes the highest."
+																},
+																"rankDnBCode": {
+																	"type": "integer",
+																	"example": 10961,
+																	"description": "A unique code assigned by Dun & Bradstreet to identify the population for the geographical area in which this address is located.<br/>Refer to Reference code table \"235 [Population Rank]\" for all possible values."
+																},
+																"rankDescription": {
+																	"type": "string",
+																	"example": "500,000 +",
+																	"description": "A range of the population for the geographical area where the entity is located."
+																}
+															},
+															"additionalProperties": true
+														}
+													},
+													"additionalProperties": true
+												},
+												"locationOwnership": {
+													"type": "object",
+													"description": "The details of the terms under which the entity occupies the premises.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "Rents",
+															"description": "Description of the terms under which the entity occupies the premises (e.g., owned, rented, leased)."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 1129,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the terms under which the entity occupies the premises.<br/>Refer to Reference code table \"43 [Tenure Type]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"premisesArea": {
+													"type": "object",
+													"description": "The details of space the entity utilizes at this address.",
+													"properties": {
+														"measurement": {
+															"type": "number",
+															"example": 10034,
+															"description": "A number portion of the amount to of space the entity occupies at this address (e.g., the 2000 in 2000 square meters)."
+														},
+														"unitDescription": {
+															"type": "string",
+															"example": "square foot",
+															"description": "The measurement unit used to express the premises area measurement (e.g., acre, square meters, square feet)."
+														},
+														"unitDnBCode": {
+															"type": "integer",
+															"example": 3848,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the measurement unit used to express the premises area measurement.<br/>Refer to Reference code table \"32 [Area Unit]\" for all possible values."
+														},
+														"reliabilityDescription": {
+															"type": "string",
+															"example": "Actual",
+															"description": "The accuracy of the measurement (e.g., actual, estimated, modeled)."
+														},
+														"reliabilityDnBCode": {
+															"type": "integer",
+															"example": 9092,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the accuracy of the measurement.<br/>Refer to Reference code table \"171 [Reliability]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"isManufacturingLocation": {
+													"type": "boolean",
+													"example": true,
+													"description": "Indicates if manufacturing activity is performed at this facility by the entity.<br/><br/>- If true, the entity performs manufacturing activity at this facility.<br/>- If false, the entity does not performs manufacturing activity at this facility."
+												}
+											},
+											"additionalProperties": true
+										},
+										"registeredAddress": {
+											"type": "object",
+											"description": "The details of the official address of the entity as registered with a local or national registry to which all official correspondence must be sent.",
+											"properties": {
+												"language": {
+													"type": "object",
+													"description": "The details of the language in which this address was recorded.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "English",
+															"description": "The name of the language in which this address was recorded."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 39,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the language in which this address was recorded.<br/>Refer to Reference code table \"3 [Language]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressCountry": {
+													"type": "object",
+													"description": "The details of the country/market in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "United States",
+															"description": "The name of the country/market in which this address is located."
+														},
+														"isoAlpha2Code": {
+															"type": "string",
+															"example": "US",
+															"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country/market in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressLocality": {
+													"type": "object",
+													"description": "The details of the city, town, township, village, borough, etc. in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "SAN FRANCISCO",
+															"description": "The name of the city, town, township, village, borough, etc. in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"minorTownName": {
+													"type": "string",
+													"example": "Booker",
+													"description": "The name of the village, town or suburb when it is not a Primary Town or City (e.g., the Booker in Booker, High Wycombe)."
+												},
+												"addressRegion": {
+													"type": "object",
+													"description": "The details of the locally governed area that forms part of a centrally governed nation to identify where this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "California",
+															"description": "The name of the locally governed area that forms part of a centrally governed nation to identify where this address is located."
+														},
+														"abbreviatedName": {
+															"type": "string",
+															"example": "CA",
+															"description": "The shortened name of the locally governed area that forms part of a centrally governed nation. For example 'NJ' for the US State New Jersey within Country United States.<br/><br/>Note: The abbreviation does not always correspond to the ISO representation and can vary between countries based on data collection."
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressCounty": {
+													"type": "object",
+													"description": "The details of the county in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "SAN MATEO",
+															"description": "The name of the county in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"postalCode": {
+													"type": "string",
+													"example": 941109999,
+													"description": "An identifier used by the local country's postal authority to identify where this address is located."
+												},
+												"postalCodePosition": {
+													"type": "object",
+													"description": "The details of the position of the Postal Code when presenting the address.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "Post code presented before Town/City name",
+															"description": "The position of the Postal Code when presenting the address (e.g., before the Primary Town/City)."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 1009,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the position of the Postal Code when presenting the address.<br/>Refer to Reference code table \"210 [Postal Code Position]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"streetNumber": {
+													"type": "string",
+													"example": 492,
+													"description": "The number part of the street address where the entity is located. <br/><br/>This may be a single number, a number with an appendix, or a range of street numbers. <br/><br/>For example, the &quot;51 - 59C&quot; in the address 51 - 59C Wall Street."
+												},
+												"streetName": {
+													"type": "string",
+													"example": "KOLLER ST",
+													"description": "The name of the street where the entity is located. <br/><br/>For example, &quot;Wall Street&quot; in the address 51 - 59C Wall Street."
+												},
+												"streetAddress": {
+													"type": "object",
+													"description": "The details of the street address where the entity is located.",
+													"properties": {
+														"line1": {
+															"type": "string",
+															"example": "492 KOLLER ST",
+															"description": "The first line of the address where the entity is located.<br/><br/>For example, &quot;41 Central Chambers&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+														},
+														"line2": {
+															"type": "string",
+															"example": "Suite 100",
+															"description": "The second line of the address where the entity is located.<br/><br/>For example, &quot;Dame Court&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+														},
+														"line3": {
+															"type": "string",
+															"example": "Address line 3",
+															"description": "The third line of the address where the entity is located."
+														},
+														"line4": {
+															"type": "string",
+															"example": "Address line 4",
+															"description": "The forth line of the address where the entity is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"postOfficeBox": {
+													"type": "object",
+													"description": "The details of the identifier issued to the entity by a private or public Postal Office for the purposes of collecting mail for the entity for subsequent collection or delivery.",
+													"properties": {
+														"postOfficeBoxNumber": {
+															"type": "string",
+															"example": 5309,
+															"description": "An identifier issued to the entity by a private or public postal office for the purposes of collecting mail for the entity for subsequent collection or delivery.<br/><br/>This includes only the identifying number (or text) and not the textual description of the PO Box type. For example the contents would be just the number 12 from &quot;PO Box 12&quot;, or just the number 57 from &quot;PMB 57&quot;."
+														},
+														"typeDescription": {
+															"type": "string",
+															"example": "Supplied by public Post Office authority",
+															"description": "The type of the PO Box (e.g., Post Office Box, PMB)."
+														},
+														"typeDnBCode": {
+															"type": "integer",
+															"example": 120,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the type of PO Box.<br/>Refer to Reference code table \"208 [Postal Box Type]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												}
+											},
+											"additionalProperties": true
+										},
+										"mailingAddress": {
+											"type": "object",
+											"description": "The details of the address used by the entity for mailing purposes.",
+											"properties": {
+												"language": {
+													"type": "object",
+													"description": "The details of the language in which this address was recorded.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "English",
+															"description": "The name of the language in which this address was recorded."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 39,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the language in which this address was recorded.<br/>Refer to Reference code table \"3 [Language]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressCountry": {
+													"type": "object",
+													"description": "The details of the country/market in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "United States",
+															"description": "The name of the country/market in which this address is located."
+														},
+														"isoAlpha2Code": {
+															"type": "string",
+															"example": "US",
+															"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country/market in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"continentalRegion": {
+													"type": "object",
+													"description": "The details of the continental region in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "North America",
+															"description": "The name of the continental region for this address.<br/><br/>Possible values:<br/>- Africa<br/>- Asia Pacific<br/>- Europe<br/>- Latin America<br/>- Middle East<br/>- North America"
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressLocality": {
+													"type": "object",
+													"description": "The details of the city, town, township, village, borough, etc. in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "SAN FRANCISCO",
+															"description": "The name of the city, town, township, village, borough, etc. in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"minorTownName": {
+													"type": "string",
+													"example": "Booker",
+													"description": "The name of the village, town or suburb when it is not a Primary Town or City (e.g., the Booker in Booker, High Wycombe)."
+												},
+												"addressRegion": {
+													"type": "object",
+													"description": "The details of the locally governed area that forms part of a centrally governed nation to identify where this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "California",
+															"description": "The name of the locally governed area that forms part of a centrally governed nation to identify where this address is located."
+														},
+														"abbreviatedName": {
+															"type": "string",
+															"example": "CA",
+															"description": "The shortened name of the locally governed area that forms part of a centrally governed nation. For example 'NJ' for the US State New Jersey within Country United States.<br/><br/>Note: The abbreviation does not always correspond to the ISO representation and can vary between countries based on data collection."
+														}
+													},
+													"additionalProperties": true
+												},
+												"addressCounty": {
+													"type": "object",
+													"description": "The details of the county in which this address is located.",
+													"properties": {
+														"name": {
+															"type": "string",
+															"example": "SAN MATEO",
+															"description": "The name of the county in which this address is located."
+														}
+													},
+													"additionalProperties": true
+												},
+												"postalCode": {
+													"type": "string",
+													"example": 941109999,
+													"description": "An identifier used by the local country's postal authority to identify where this address is located."
+												},
+												"postalCodePosition": {
+													"type": "object",
+													"description": "The details of the position of the Postal Code when presenting the address.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "Post code presented before Town/City name",
+															"description": "The position of the Postal Code when presenting the address (e.g., before the Primary Town/City)."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 1009,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the position of the Postal Code when presenting the address.<br/>Refer to Reference code table \"210 [Postal Code Position]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												},
+												"postalRoute": {
+													"type": "string",
+													"example": "route 3B",
+													"description": "A code assigned by the local postal authority that sorts mail pieces to the individual carrier routes within a postal code."
+												},
+												"streetNumber": {
+													"type": "string",
+													"example": 492,
+													"description": "The number part of the street address where the entity is located. <br/><br/>This may be a single number, a number with an appendix, or a range of street numbers. <br/><br/>For example, the &quot;51 - 59C&quot; in the address 51 - 59C Wall Street."
+												},
+												"streetName": {
+													"type": "string",
+													"example": "KOLLER ST",
+													"description": "The name of the street where the entity is located. <br/><br/>For example, &quot;Wall Street&quot; in the address 51 - 59C Wall Street."
+												},
+												"streetAddress": {
+													"type": "object",
+													"description": "The details of the street address where the entity is located.",
+													"properties": {
+														"line1": {
+															"type": "string",
+															"example": "492 KOLLER ST",
+															"description": "The first line of the address where the entity is located.<br/><br/>For example, &quot;41 Central Chambers&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+														},
+														"line2": {
+															"type": "string",
+															"example": "Suite 100",
+															"description": "The second line of the address where the entity is located.<br/><br/>For example, &quot;Dame Court&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+														}
+													},
+													"additionalProperties": true
+												},
+												"postOfficeBox": {
+													"type": "object",
+													"description": "The details of the identifier issued to the entity by a private or public Postal Office for the purposes of collecting mail for the entity for subsequent collection or delivery.",
+													"properties": {
+														"postOfficeBoxNumber": {
+															"type": "string",
+															"example": 5309,
+															"description": "An identifier issued to the entity by a private or public postal office for the purposes of collecting mail for the entity for subsequent collection or delivery.<br/><br/>This includes only the identifying number (or text) and not the textual description of the PO Box type. For example the contents would be just the number 12 from &quot;PO Box 12&quot;, or just the number 57 from &quot;PMB 57&quot;."
+														},
+														"typeDescription": {
+															"type": "string",
+															"example": "Supplied by public Post Office authority",
+															"description": "The type of the PO Box (e.g., Post Office Box, PMB)."
+														},
+														"typeDnBCode": {
+															"type": "integer",
+															"example": 120,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the type of PO Box.<br/>Refer to Reference code table \"208 [Postal Box Type]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												}
+											},
+											"additionalProperties": true
+										},
+										"stockExchanges": {
+											"type": "array",
+											"description": "The details of the Stock Exchanges on which the entity's shares are traded.",
+											"items": {
+												"properties": {
+													"tickerName": {
+														"type": "string",
+														"example": "NYSE:DNB",
+														"description": "Text by which the entity is identified on this Stock Exchange for share trading purposes."
+													},
+													"exchangeName": {
+														"type": "object",
+														"description": "The details of the name of the Stock Exchange on which the entity's shares are traded.",
+														"properties": {
+															"description": {
+																"type": "string",
+																"example": "NYSE",
+																"description": "The name the Stock Exchange."
+															}
+														},
+														"additionalProperties": true
+													},
+													"exchangeCountry": {
+														"type": "object",
+														"description": "The details of the country of the Stock Exchange.",
+														"properties": {
+															"isoAlpha2Code": {
+																"type": "string",
+																"example": "US",
+																"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country of the Stock Exchange."
+															}
+														},
+														"additionalProperties": true
+													},
+													"isPrimary": {
+														"type": "boolean",
+														"example": true,
+														"description": "Indicates if this is the most important stock exchange among all the stock exchange where the entity's shares are traded. <br/><br/>- If true, indicates that this is the most important Stock Exchange.<br/>- If false, indicates that this is not the most important Stock Exchange."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"thirdPartyAssessment": {
+											"type": "array",
+											"description": "The details of the appraisal or opinion assigned to the entity by an entity other than the Dun & Bradstreet Worldwide Network (WWN).",
+											"items": {
+												"properties": {
+													"description": {
+														"type": "string",
+														"example": "Fortune 500 Revenue Rank",
+														"description": "The kind of appraisal, opinion, or rank that was assigned to the entity by the third party (e.g., Moody's Long Term Obligation Rating, FICO score, Vantage Score)."
+													},
+													"dnbCode": {
+														"type": "integer",
+														"example": 23290,
+														"description": "A unique code assigned by Dun & Bradstreet to identify the type of assessment.<br/>Refer to Reference code table \"489 [Third Party Assessment]\" for all possible values."
+													},
+													"assessmentDate": {
+														"type": "string",
+														"example": 2017,
+														"description": "The date on which the assessment value was assigned by the third party."
+													},
+													"value": {
+														"type": "string",
+														"example": 31,
+														"description": "The value for the appraisal, opinion, or rank that was assigned by the third party."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"registrationNumbers": {
+											"type": "array",
+											"description": "The details of the numbers assigned by an external body or by Dun & Bradstreet that either uniquely identifies or helps to identify the entity.",
+											"items": {
+												"properties": {
+													"registrationNumber": {
+														"type": "string",
+														"example": "12-3456789",
+														"description": "The number assigned by an external body or by Dun & Bradstreet that either uniquely identifies or helps to identify the entity."
+													},
+													"typeDescription": {
+														"type": "string",
+														"example": "Federal Taxpayer Identification Number (US)",
+														"description": "The type of registration (e.g., Chamber of Commerce Number, Value Added Tax Number, Federal Taxpayer Identification Number, Companies Registry Office Number)."
+													},
+													"typeDnBCode": {
+														"type": "integer",
+														"example": 6863,
+														"description": "A unique code assigned by Dun & Bradstreet to identify the type of registration number.<br/>Refer to Reference code table \"7 [Registration Number Type]\" for all possible values."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"industryCodes": {
+											"type": "array",
+											"description": "The details of the business activities in which the entity is actively engaged using standardized coding schemes such as European NACE and U.S. Standard Industry Classifications (SIC).",
+											"items": {
+												"properties": {
+													"code": {
+														"type": "string",
+														"example": 323111,
+														"description": "The code that identifies the business activity in which the entity is engaged.  <br/><br/>For example, 1611 represents the highway and street construction industry in the U.S. SIC (Standard Industrial Classification) system.<br/><br/>Note: These are generally external codes created by an external authoritative body, like the U.S. Office of Management and Budget (OMB); however, Dun & Bradstreet may have created extensions to more precisely define an activity, as in the case of the SIC 2+2 (the last 4 digits of an 8-digit SIC)."
+													},
+													"description": {
+														"type": "string",
+														"example": "Commercial Printing ",
+														"description": "The business activity description as assigned by the coding scheme used."
+													},
+													"typeDescription": {
+														"type": "string",
+														"example": "North American Industry Classification System 2012",
+														"description": "The industry coding scheme used for this Industry Code (e.g., U.S. Standard Industrial Classification (SIC) 1987, Standard Industry Code - 8 digit, North American Industry Classification System (NAICS), Nomenclature General des Activities Economiques dans L`Union Europeenne (NACE))."
+													},
+													"typeDnBCode": {
+														"type": "integer",
+														"example": 24664,
+														"description": "A unique code assigned by Dun & Bradstreet to identify the industry coding scheme.<br/>Industry schemes supported currently:<br/>D&B Industry Code (3599)<br/>NAICS Code (30832)<br/>US 1987 SIC Code (399)<br/>NACE Revision 2 (29104)<br/>D&B Hoovers Industry Code (25838)<br/>Major Industry Category (24657)<br/>Local Activity Codes (specific to markets)<br/>Refer to Reference code table \"30 [Industry Code Type]\" for all possible values."
+													},
+													"priority": {
+														"type": "integer",
+														"example": 1,
+														"description": "A number identifying the order in which this industry code should be presented relative to other industry codes of the same type.  Priority is based on the percentage of business the entity does in the industry."
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"startDate": {
+											"type": "string",
+											"example": "2012-09-03",
+											"description": "The date the entity chooses to claim as its established date.\r<br/> \r<br/>Note: This date may be different from the Operations Start Date and adheres to ISO 8601 standard."
+										},
+										"businessEntityType": {
+											"type": "object",
+											"description": "The details of the legal form or structure of the entity as registered with government authorities.",
+											"properties": {
+												"description": {
+													"type": "string",
+													"example": "Corporation",
+													"description": "The name of the legal form or structure of the entity as registered with government authorities (e.g., partnership, corporation, private limited company, government department, proprietorship)."
+												},
+												"dnbCode": {
+													"type": "integer",
+													"example": 451,
+													"description": "A unique code assigned by Dun & Bradstreet to identify the legal form or structure of the entity as registered with government authorities.<br/>Refer to Reference code table \"197 [Business Entity Type]\" for all possible values."
+												}
+											},
+											"additionalProperties": true
+										},
+										"controlOwnershipDate": {
+											"type": "string",
+											"example": 1985,
+											"description": "The date when the current owners took over the entity."
+										},
+										"controlOwnershipType": {
+											"type": "object",
+											"description": "The details of the type of controlling ownership.",
+											"properties": {
+												"description": {
+													"type": "string",
+													"example": "Privately owned",
+													"description": "The name for the type of controlling ownership (e.g., publicly owned, privately owned, state owned).   <br/><br/>Note:  For some countries, controlling ownership can be derived from the legal form."
+												},
+												"dnbCode": {
+													"type": "integer",
+													"example": 9058,
+													"description": "A unique code assigned by Dun & Bradstreet to identify the type of controlling ownership.<br/>Refer to Reference code table \"175 [Control Type]\" for all possible values."
+												}
+											},
+											"additionalProperties": true
+										},
+										"isAgent": {
+											"type": "boolean",
+											"example": false,
+											"description": "Indicates if the entity acts as an agent promoting the goods or services of another entity (e.g., Sales Agent, Purchasing Agent). <br/><br/>- If true, the entity acts as an agent.<br/>- If false, the entity does not act as an agent."
+										},
+										"isImporter": {
+											"type": "boolean",
+											"example": false,
+											"description": "Indicates if the entity is an importer.<br/><br/>- If true, the entity imports a quantity of goods from other countries.<br/>- If false, the entity does not import a quantity of goods from other countries."
+										},
+										"isExporter": {
+											"type": "boolean",
+											"example": false,
+											"description": "Indicates if the entity is an exporter.<br/><br/>- If true, the entity exports a quantity of goods to other countries.<br/>- If false, the entity does not export a quantity of goods to other countries."
+										},
+										"numberOfEmployees": {
+											"type": "array",
+											"description": "The details of the people engaged by the entity to perform its operations.",
+											"items": {
+												"properties": {
+													"value": {
+														"type": "integer",
+														"example": 1234,
+														"description": "The total number of people engaged by the entity to perform its operations.  The scope of this employee figure is identified in informationScopeDescription."
+													},
+													"informationScopeDescription": {
+														"type": "string",
+														"example": "Consolidated",
+														"description": "The scope of Number of Employees value (e.g., Consolidated, Individual, HQ only)."
+													},
+													"informationScopeDnBCode": {
+														"type": "integer",
+														"example": 9067,
+														"description": "A unique code assigned by Dun & Bradstreet to identify the scope of Number of Employees.<br/>Refer to Reference code table \"192 [Information Scope]\" for all possible values."
+													},
+													"reliabilityDescription": {
+														"type": "string",
+														"example": "Actual",
+														"description": "The integrity of the employee figures (e.g., actual, estimated, or modeled)."
+													},
+													"reliabilityDnBCode": {
+														"type": "integer",
+														"example": 9092,
+														"description": "A unique code assigned by Dun & Bradstreet to identify the integrity of the employee figures.<br/>Refer to Reference code table \"171 [Reliability]\" for all possible values."
+													},
+													"employeeCategories": {
+														"type": "array",
+														"description": "The details of the employee figures for the different function levels of the entity.",
+														"items": {
+															"properties": {
+																"employmentBasisDescription": {
+																	"type": "string",
+																	"example": "Principals",
+																	"description": "The type of employees that have been included in the calculation of the number of employees on the basis of their employment contract (e.g., Principals, Part Time Workers)."
+																},
+																"employmentBasisDnBCode": {
+																	"type": "integer",
+																	"example": 9064,
+																	"description": "A unique code assigned by Dun & Bradstreet to identify the employment basis description.<br/>Refer to Reference code table \"77 [Employment Basis]\" for all possible values."
+																}
+															},
+															"additionalProperties": true,
+															"type": "object"
+														}
+													},
+													"trend": {
+														"type": "array",
+														"description": "The details of the employee growth  history.",
+														"items": {
+															"properties": {
+																"timePeriod": {
+																	"type": "object",
+																	"description": "The details of timeframe for which this data is recorded.",
+																	"properties": {
+																		"description": {
+																			"type": "string",
+																			"example": "1 - 5 years",
+																			"description": "The timeframe for which this data is recorded."
+																		},
+																		"dnbCode": {
+																			"type": "integer",
+																			"example": 13721,
+																			"description": "A unique code assigned by Dun & Bradstreet to identify the timeframe for which this data is recorded.<br/>Refer to Reference code table \"168 [Time Period]\" for all possible values."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"growthRate": {
+																	"type": "number",
+																	"example": -7,
+																	"description": "The percentage of change in number of employees from base year compared to the trend year."
+																}
+															},
+															"additionalProperties": true,
+															"type": "object"
+														}
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"financials": {
+											"type": "array",
+											"description": "The details of the standardized view of the financial results of the entity; this is usually extracted from a set of accounts.",
+											"items": {
+												"properties": {
+													"financialStatementToDate": {
+														"type": "string",
+														"example": "2016-12-31",
+														"description": "The date when the accounting period ended.  If the Reliability Code denotes the figures are projected (future), then this is the date when the accounting period will end.<br/><br/>Format: YYYY-MM-DD or YYYY-MM or YYYY"
+													},
+													"financialStatementDuration": {
+														"type": "string",
+														"example": "Annual",
+														"description": "The period of the financial statement expressed as a time interval."
+													},
+													"informationScopeDescription": {
+														"type": "string",
+														"example": "Consolidated",
+														"description": "The organizational scope of the financial summary (e.g., Individual (Organization including any branches), Consolidated (Organization including any branches and subsidiaries))."
+													},
+													"informationScopeDnBCode": {
+														"type": "integer",
+														"example": "9067",
+														"description": "A unique code assigned by Dun & Bradstreet to identify the organizational scope of the financial summary.<br/>Refer to Reference code table \"192 [Information Scope]\" for all possible values."
+													},
+													"reliabilityDescription": {
+														"type": "string",
+														"example": "Actual",
+														"description": "The integrity of the financial figures (e.g., actual, estimated, or modeled)."
+													},
+													"reliabilityDnBCode": {
+														"type": "integer",
+														"example": 9092,
+														"description": "A unique code assigned by Dun & Bradstreet to identify the integrity of the financial figures.<br/>Refer to Reference code table \"171 [Reliability]\" for all possible values."
+													},
+													"unitCode": {
+														"type": "string",
+														"example": "Single Units",
+														"description": "The unit of size in which the financial summary figures are provided (e.g., in 1,000s; in 1,000,000s)"
+													},
+													"accountantName": {
+														"type": "string",
+														"example": "Johnson, Jordan & Jones CPAs",
+														"description": "The name of either an individual or an accounting firm."
+													},
+													"yearlyRevenue": {
+														"type": "array",
+														"description": "The details of the income received from customers from the sale of the entity's goods and/or services. This is the gross sales minus any returns, rebates/discounts, allowances for damages or shortages, shipping expenses passed on to the customer, and amounts due where there is not a reasonable expectation of collection.",
+														"items": {
+															"properties": {
+																"value": {
+																	"type": "number",
+																	"example": 19945238,
+																	"description": "The monetary value of income received from customers from the sale of the entity's goods and/or services.  This is the gross sales minus any returns, rebates/discounts, allowances for damages or shortages, shipping expenses passed on to the customer."
+																},
+																"currency": {
+																	"type": "string",
+																	"example": "USD",
+																	"description": "The three-letter currency code, defined in the ISO 3166-1 scheme published by International Organization for Standardization (ISO) identifying the type of money in which this amount is expressed (e.g. USD, CAD, GBP, EUR)."
+																},
+																"trend": {
+																	"type": "array",
+																	"description": "The details of the percentage of change of this item as of base year compared to the trend year.",
+																	"items": {
+																		"properties": {
+																			"timePeriod": {
+																				"type": "object",
+																				"description": "The details of the timeframe for which this data is recorded.",
+																				"properties": {
+																					"description": {
+																						"type": "string",
+																						"example": "1-5 years",
+																						"description": "The timeframe for which this data is recorded."
+																					},
+																					"dnbCode": {
+																						"type": "integer",
+																						"example": 13721,
+																						"description": "A unique code assigned by Dun & Bradstreet to identify the timeframe in which this data is recorded.<br/>Refer to Reference code table \"168 [Time Period]\" for all possible values."
+																					}
+																				},
+																				"additionalProperties": true
+																			},
+																			"growthRate": {
+																				"type": "number",
+																				"example": 2,
+																				"description": "The percentage of change of this item as of base year compared to the trend year."
+																			}
+																		},
+																		"additionalProperties": true,
+																		"type": "object"
+																	}
+																}
+															},
+															"additionalProperties": true,
+															"type": "object"
+														}
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"mostSeniorPrincipals": {
+											"type": "array",
+											"description": "The  details of the most important principals.",
+											"items": {
+												"properties": {
+													"givenName": {
+														"type": "string",
+														"example": "Leslie",
+														"description": "The given name of the principal."
+													},
+													"familyName": {
+														"type": "string",
+														"example": "Smith",
+														"description": "The family name of the principal."
+													},
+													"fullName": {
+														"type": "string",
+														"example": "Leslie Ann Smith",
+														"description": "The complete name of the principal."
+													},
+													"namePrefix": {
+														"type": "string",
+														"example": "Dr.",
+														"description": "The correct form of address for the principal (e.g., Dr., Professor, Lord)."
+													},
+													"nameSuffix": {
+														"type": "string",
+														"example": "PhD",
+														"description": "The familial or professional suffix to the principal's name."
+													},
+													"gender": {
+														"type": "string",
+														"example": "Female",
+														"description": "The gender of this individual."
+													},
+													"jobTitles": {
+														"type": "array",
+														"description": "The details of the positions held by this individual.",
+														"items": {
+															"properties": {
+																"title": {
+																	"type": "string",
+																	"example": "President",
+																	"description": "The position held by this individual."
+																}
+															},
+															"additionalProperties": true,
+															"type": "object"
+														}
+													},
+													"managementResponsibilities": {
+														"type": "array",
+														"description": "The details of the current business functions of the entity represented as a standard Management Responsibility Code (MRC).",
+														"items": {
+															"properties": {
+																"description": {
+																	"type": "string",
+																	"example": "President",
+																	"description": "Name of the business function of the entity derived from a standard Management Responsibility Code (MRC)."
+																},
+																"mrcCode": {
+																	"type": "string",
+																	"example": "A1A6",
+																	"description": "A unique code identifying the business function of the entity derived from a standard Management Responsibility Code (MRC)."
+																}
+															},
+															"additionalProperties": true,
+															"type": "object"
+														}
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"currentPrincipals": {
+											"type": "array",
+											"description": "The details of the principals that are actively associated with the entity.",
+											"items": {
+												"properties": {
+													"givenName": {
+														"type": "string",
+														"example": "Leslie",
+														"description": "The given name of the principal."
+													},
+													"familyName": {
+														"type": "string",
+														"example": "Smith",
+														"description": "The family name of the principal."
+													},
+													"fullName": {
+														"type": "string",
+														"example": "Leslie Ann Smith",
+														"description": "The complete name of the principal."
+													},
+													"namePrefix": {
+														"type": "string",
+														"example": "Dr.",
+														"description": "The correct form of address for the principal (e.g., Dr., Professor, Lord)."
+													},
+													"nameSuffix": {
+														"type": "string",
+														"example": "PhD",
+														"description": "The familial or professional suffix to the principal's name."
+													},
+													"gender": {
+														"type": "string",
+														"example": "Female",
+														"description": "The gender of this individual."
+													},
+													"jobTitles": {
+														"type": "array",
+														"description": "The details of the positions held by this individual.",
+														"items": {
+															"properties": {
+																"title": {
+																	"type": "string",
+																	"example": "President",
+																	"description": "The position held by this individual."
+																}
+															},
+															"additionalProperties": true,
+															"type": "object"
+														}
+													},
+													"managementResponsibilities": {
+														"type": "array",
+														"description": "The details of the current business functions of the entity represented as a standard Management Responsibility Code (MRC).",
+														"items": {
+															"properties": {
+																"description": {
+																	"type": "string",
+																	"example": "President",
+																	"description": "Name of the business function of the entity derived from a standard Management Responsibility Code (MRC)."
+																},
+																"mrcCode": {
+																	"type": "string",
+																	"example": "A1A6",
+																	"description": "A unique code identifying the business function of the entity derived from a standard Management Responsibility Code (MRC)."
+																}
+															},
+															"additionalProperties": true,
+															"type": "object"
+														}
+													}
+												},
+												"additionalProperties": true,
+												"type": "object"
+											}
+										},
+										"socioEconomicInformation": {
+											"type": "object",
+											"description": "The details of the categorization of the entity in Socio Economic or Statistical groups.",
+											"properties": {
+												"isMinorityOwned": {
+													"type": "boolean",
+													"example": true,
+													"description": "Indicates if the entity is minority owned.  Minority owned means it is certified as an entity that is greater than 50% owned by and whose management and daily operations are controlled by one or more minority group members<br/><br/>- If true, indicates that this is a minority-owned entity"
+												},
+												"isSmallBusiness": {
+													"type": "boolean",
+													"example": true,
+													"description": "Indicates if the business qualifies as small business, eligible for assistance from SBA, with a place of business located in the United States. It must operate primarily within the United States or make a significant contribution to the U.S. economy through payment of taxes or use of American products, materials or labor. Together with its affiliates, it must meet the numerical size standards as defined in the Small Business Size Regulations 13 CFR 121.<br/><br/>- If true, indicates that this is a small business.<br/>- If false, indicates that this is not a small business"
+												}
+											},
+											"additionalProperties": true
+										},
+										"isStandalone": {
+											"type": "boolean",
+											"example": false,
+											"description": "Indicates if the entity is a member of a legal family tree. <br/><br/>- If true, indicates that the entity is not a member of a legal family tree.  This means it cannot play any family tree role and corporateLinkage will not be present.<br/>- If false, indicates that the entity is a member of a legal family tree.  The roles it plays is indicated by Family Tree Member Roles played."
+										},
+										"corporateLinkage": {
+											"type": "object",
+											"description": "The details of the relationship between the entity and other entities in the legal family tree.",
+											"properties": {
+												"familytreeRolesPlayed": {
+													"type": "array",
+													"description": "The details of the roles the entity plays as a member of an ownership structured family tree.",
+													"items": {
+														"properties": {
+															"description": {
+																"type": "string",
+																"example": "Parent/Headquarters",
+																"description": "The role the entity plays as a member of an ownership structured family tree (e.g., a branch, division, a parent, headquarters, subsidiary, global ultimate, domestic ultimate)."
+															},
+															"dnbCode": {
+																"type": "integer",
+																"example": 9141,
+																"description": "A unique code assigned by Dun & Bradstreet to identify describing family tree role.<br/>Refer to Reference code table \"202 [Family Tree Role]\" for all possible values."
+															}
+														},
+														"additionalProperties": true,
+														"type": "object"
+													}
+												},
+												"hierarchyLevel": {
+													"type": "integer",
+													"example": 1,
+													"description": "The number of family-tree levels below the global ultimate the entity is in its corporate hierarchy. The hierarchy level value of the global ultimate will always be 1. Each subsidiary level below the global ultimate is incremented by 1. Branch locations in a family tree will have the same hierarchy code as its associated headquarter."
+												},
+												"globalUltimateFamilyTreeMembersCount": {
+													"type": "integer",
+													"example": "",
+													"description": "The total number of entities in the entity's Family tree starting from Global Ultimate."
+												},
+												"globalUltimate": {
+													"type": "object",
+													"description": "The details of the top most entity in the family tree, tracing each parent up to its own parent.  <br/><br/>For example, Company-A is based in the US and has Company-B as its parent also in the US. In turn Company-B is owned by Company-C, also in the US, which is owned by Company-D which is in the UK. Thus, the Global Ultimate of this family tree (and therefore of each member of the family tree) is Company-D.",
+													"properties": {
+														"duns": {
+															"type": "string",
+															"example": 804735132,
+															"description": "The D-U-N-S Number, assigned by Dun & Bradstreet, is an identification number that uniquely identifies the entity in accordance with the Data Universal Numbering System (D-U-N-S)."
+														},
+														"primaryName": {
+															"type": "string",
+															"example": "GORMAN MANUFACTURING COMPANY, INC.",
+															"description": "The single name by which the entity is primarily known or identified."
+														},
+														"primaryAddress": {
+															"type": "object",
+															"description": "The details of the single primary or physical address at which the entity is located.",
+															"properties": {
+																"addressCountry": {
+																	"type": "object",
+																	"description": "The details of the country/market in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "United States",
+																			"description": "The name of the country/market in which this address is located."
+																		},
+																		"isoAlpha2Code": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country/market in which this address is located."
+																		},
+																		"fipsCode": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The Federal Information Processing Standards (FIPS) code value that identifies the country/market in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"continentalRegion": {
+																	"type": "object",
+																	"description": "The details of the continental region in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "North America",
+																			"description": "The name of the continental region for this address.<br/><br/>Possible values:<br/>- Africa<br/>- Asia Pacific<br/>- Europe<br/>- Latin America<br/>- Middle East<br/>- North America"
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressLocality": {
+																	"type": "object",
+																	"description": "The details of the city, town, township, village, borough, etc. in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN FRANCISCO",
+																			"description": "The name of the city, town, township, village, borough, etc. in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressRegion": {
+																	"type": "object",
+																	"description": "The details of the locally governed area that forms part of a centrally governed nation to identify where this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "California",
+																			"description": "The name of the locally governed area that forms part of a centrally governed nation to identify where this address is located."
+																		},
+																		"abbreviatedName": {
+																			"type": "string",
+																			"example": "CA",
+																			"description": "The shortened name of the locally governed area that forms part of a centrally governed nation. For example 'NJ' for the US State New Jersey within Country United States.<br/><br/>Note: The abbreviation does not always correspond to the ISO representation and can vary between countries based on data collection."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressCounty": {
+																	"type": "object",
+																	"description": "The details of the county in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN MATEO",
+																			"description": "The name of the county in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"postalCode": {
+																	"type": "string",
+																	"example": 941109999,
+																	"description": "An identifier used by the local country's postal authority to identify where this address is located."
+																},
+																"streetAddress": {
+																	"type": "object",
+																	"description": "The details of the street address where the entity is located.",
+																	"properties": {
+																		"line1": {
+																			"type": "string",
+																			"example": "492 KOLLER ST",
+																			"description": "The first line of the address where the entity is located.<br/><br/>For example, &quot;41 Central Chambers&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		},
+																		"line2": {
+																			"type": "string",
+																			"example": "Suite 100",
+																			"description": "The second line of the address where the entity is located.<br/><br/>For example, &quot;Dame Court&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		}
+																	},
+																	"additionalProperties": true
+																}
+															},
+															"additionalProperties": true
+														}
+													},
+													"additionalProperties": true
+												},
+												"domesticUltimate": {
+													"type": "object",
+													"description": "The details of the Domestic Ultimate which is the last entity in the tree, when reviewing upwards, that is in the same country as the entity. <br/><br/>For example, Company-A is based in the US and has Company-B as its parent also in the US. In turn Company-B is owned by Company-C, also in the US, which is owned by Company-D which is in the UK. Thus, the Domestic Ultimate of Company-A is actually Company-C as this is the last entity in the parent chain that is in the US.",
+													"properties": {
+														"duns": {
+															"type": "string",
+															"example": 804735132,
+															"description": "The D-U-N-S Number, assigned by Dun & Bradstreet, is an identification number that uniquely identifies the entity in accordance with the Data Universal Numbering System (D-U-N-S)."
+														},
+														"primaryName": {
+															"type": "string",
+															"example": "GORMAN MANUFACTURING COMPANY, INC.",
+															"description": "The single name by which the entity is primarily known or identified."
+														},
+														"primaryAddress": {
+															"type": "object",
+															"description": "The details of the single primary or physical address at which the entity is located.",
+															"properties": {
+																"addressCountry": {
+																	"type": "object",
+																	"description": "The details of the country/market in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "United States",
+																			"description": "The name of the country/market in which this address is located."
+																		},
+																		"isoAlpha2Code": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country/market in which this address is located."
+																		},
+																		"fipsCode": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The Federal Information Processing Standards (FIPS) code value that identifies the country/market in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"continentalRegion": {
+																	"type": "object",
+																	"description": "The details of the continental region in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "North America",
+																			"description": "The name of the continental region for this address.<br/><br/>Possible values:<br/>- Africa<br/>- Asia Pacific<br/>- Europe<br/>- Latin America<br/>- Middle East<br/>- North America"
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressLocality": {
+																	"type": "object",
+																	"description": "The details of the city, town, township, village, borough, etc. in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN FRANCISCO",
+																			"description": "The name of the city, town, township, village, borough, etc. in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressRegion": {
+																	"type": "object",
+																	"description": "The details of the locally governed area that forms part of a centrally governed nation to identify where this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "California",
+																			"description": "The name of the locally governed area that forms part of a centrally governed nation to identify where this address is located."
+																		},
+																		"abbreviatedName": {
+																			"type": "string",
+																			"example": "CA",
+																			"description": "The shortened name of the locally governed area that forms part of a centrally governed nation. For example 'NJ' for the US State New Jersey within Country United States.<br/><br/>Note: The abbreviation does not always correspond to the ISO representation and can vary between countries based on data collection."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressCounty": {
+																	"type": "object",
+																	"description": "The details of the county in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN MATEO",
+																			"description": "The name of the county in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"postalCode": {
+																	"type": "string",
+																	"example": 941109999,
+																	"description": "An identifier used by the local country's postal authority to identify where this address is located."
+																},
+																"streetAddress": {
+																	"type": "object",
+																	"description": "The details of the street address where the entity is located.",
+																	"properties": {
+																		"line1": {
+																			"type": "string",
+																			"example": "492 KOLLER ST",
+																			"description": "The first line of the address where the entity is located.<br/><br/>For example, &quot;41 Central Chambers&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		},
+																		"line2": {
+																			"type": "string",
+																			"example": "Suite 100",
+																			"description": "The second line of the address where the entity is located.<br/><br/>For example, &quot;Dame Court&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		}
+																	},
+																	"additionalProperties": true
+																}
+															},
+															"additionalProperties": true
+														}
+													},
+													"additionalProperties": true
+												},
+												"parent": {
+													"type": "object",
+													"description": "The details of the entity that owns more than 50% of the subject entity.",
+													"properties": {
+														"duns": {
+															"type": "string",
+															"example": 804735132,
+															"description": "The D-U-N-S Number, assigned by Dun & Bradstreet, is an identification number that uniquely identifies the entity in accordance with the Data Universal Numbering System (D-U-N-S)."
+														},
+														"primaryName": {
+															"type": "string",
+															"example": "GORMAN MANUFACTURING COMPANY, INC.",
+															"description": "The single name by which the entity is primarily known or identified."
+														},
+														"primaryAddress": {
+															"type": "object",
+															"description": "The details of the single primary or physical address at which the entity is located.",
+															"properties": {
+																"addressCountry": {
+																	"type": "object",
+																	"description": "The details of the country/market in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "United States",
+																			"description": "The name of the country/market in which this address is located."
+																		},
+																		"isoAlpha2Code": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country/market in which this address is located."
+																		},
+																		"fipsCode": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The Federal Information Processing Standards (FIPS) code value that identifies the country/market in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"continentalRegion": {
+																	"type": "object",
+																	"description": "The details of the continental region in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "North America",
+																			"description": "The name of the continental region for this address.<br/><br/>Possible values:<br/>- Africa<br/>- Asia Pacific<br/>- Europe<br/>- Latin America<br/>- Middle East<br/>- North America"
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressLocality": {
+																	"type": "object",
+																	"description": "The details of the city, town, township, village, borough, etc. in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN FRANCISCO",
+																			"description": "The name of the city, town, township, village, borough, etc. in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressRegion": {
+																	"type": "object",
+																	"description": "The details of the locally governed area that forms part of a centrally governed nation to identify where this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "California",
+																			"description": "The name of the locally governed area that forms part of a centrally governed nation to identify where this address is located."
+																		},
+																		"abbreviatedName": {
+																			"type": "string",
+																			"example": "CA",
+																			"description": "The shortened name of the locally governed area that forms part of a centrally governed nation. For example 'NJ' for the US State New Jersey within Country United States.<br/><br/>Note: The abbreviation does not always correspond to the ISO representation and can vary between countries based on data collection."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressCounty": {
+																	"type": "object",
+																	"description": "The details of the county in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN MATEO",
+																			"description": "The name of the county in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"postalCode": {
+																	"type": "string",
+																	"example": 941109999,
+																	"description": "An identifier used by the local country's postal authority to identify where this address is located."
+																},
+																"streetAddress": {
+																	"type": "object",
+																	"description": "The details of the street address where the entity is located.",
+																	"properties": {
+																		"line1": {
+																			"type": "string",
+																			"example": "492 KOLLER ST",
+																			"description": "The first line of the address where the entity is located.<br/><br/>For example, &quot;41 Central Chambers&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		},
+																		"line2": {
+																			"type": "string",
+																			"example": "Suite 100",
+																			"description": "The second line of the address where the entity is located.<br/><br/>For example, &quot;Dame Court&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		}
+																	},
+																	"additionalProperties": true
+																}
+															},
+															"additionalProperties": true
+														}
+													},
+													"additionalProperties": true
+												},
+												"headQuarter": {
+													"type": "object",
+													"description": "The details of the office that serves as the administrative center for the entity.",
+													"properties": {
+														"duns": {
+															"type": "string",
+															"example": 804735132,
+															"description": "The D-U-N-S Number, assigned by Dun & Bradstreet, is an identification number that uniquely identifies the entity in accordance with the Data Universal Numbering System (D-U-N-S)."
+														},
+														"primaryName": {
+															"type": "string",
+															"example": "GORMAN MANUFACTURING COMPANY, INC.",
+															"description": "The single name by which the entity is primarily known or identified."
+														},
+														"primaryAddress": {
+															"type": "object",
+															"description": "The details of the single primary or physical address at which the entity is located.",
+															"properties": {
+																"addressCountry": {
+																	"type": "object",
+																	"description": "The details of the country/market in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "United States",
+																			"description": "The name of the country/market in which this address is located."
+																		},
+																		"isoAlpha2Code": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The two-letter country code, defined by the International Organization for Standardization (ISO) ISO 3166-1 scheme identifying the country/market in which this address is located."
+																		},
+																		"fipsCode": {
+																			"type": "string",
+																			"example": "US",
+																			"description": "The Federal Information Processing Standards (FIPS) code value that identifies the country/market in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"continentalRegion": {
+																	"type": "object",
+																	"description": "The details of the continental region in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "North America",
+																			"description": "The name of the continental region for this address.<br/><br/>Possible values:<br/>- Africa<br/>- Asia Pacific<br/>- Europe<br/>- Latin America<br/>- Middle East<br/>- North America"
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressLocality": {
+																	"type": "object",
+																	"description": "The details of the city, town, township, village, borough, etc. in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN FRANCISCO",
+																			"description": "The name of the city, town, township, village, borough, etc. in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressRegion": {
+																	"type": "object",
+																	"description": "The details of the locally governed area that forms part of a centrally governed nation to identify where this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "California",
+																			"description": "The name of the locally governed area that forms part of a centrally governed nation to identify where this address is located."
+																		},
+																		"abbreviatedName": {
+																			"type": "string",
+																			"example": "CA",
+																			"description": "The shortened name of the locally governed area that forms part of a centrally governed nation. For example 'NJ' for the US State New Jersey within Country United States.<br/><br/>Note: The abbreviation does not always correspond to the ISO representation and can vary between countries based on data collection."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"addressCounty": {
+																	"type": "object",
+																	"description": "The details of the county in which this address is located.",
+																	"properties": {
+																		"name": {
+																			"type": "string",
+																			"example": "SAN MATEO",
+																			"description": "The name of the county in which this address is located."
+																		}
+																	},
+																	"additionalProperties": true
+																},
+																"postalCode": {
+																	"type": "string",
+																	"example": 941109999,
+																	"description": "An identifier used by the local country's postal authority to identify where this address is located."
+																},
+																"streetAddress": {
+																	"type": "object",
+																	"description": "The details of the street address where the entity is located.",
+																	"properties": {
+																		"line1": {
+																			"type": "string",
+																			"example": "492 KOLLER ST",
+																			"description": "The first line of the address where the entity is located.<br/><br/>For example, &quot;41 Central Chambers&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		},
+																		"line2": {
+																			"type": "string",
+																			"example": "Suite 100",
+																			"description": "The second line of the address where the entity is located.<br/><br/>For example, &quot;Dame Court&quot; in the address <br/>41 Central Chambers<br/>Dame Court<br/>Dublin 2"
+																		}
+																	},
+																	"additionalProperties": true
+																}
+															},
+															"additionalProperties": true
+														}
+													},
+													"additionalProperties": true
+												}
+											},
+											"additionalProperties": true
+										},
+										"dnbAssessment": {
+											"type": "object",
+											"description": "The details of the assessment made by Dun & Bradstreet or a third party in order to provide value-added information on entities.  This information may include:<br/>- recommendations on how much credit to extend to them<br/>- assessments of their liquidity<br/>- concise evaluations of their performance and behavior<br/>- predictions on the risk of conducting business with them. <br/><br/>The predictive scores are usually calculated and assigned by Dun & Bradstreet, but such assessments may also be recorded when assigned by third parties.",
+											"properties": {
+												"marketingRiskClass": {
+													"type": "object",
+													"description": "The details of the high-level classification of the marketing risk score.",
+													"properties": {
+														"description": {
+															"type": "string",
+															"example": "Low",
+															"description": "The high-level classification of the marketing risk score."
+														},
+														"dnbCode": {
+															"type": "integer",
+															"example": 10925,
+															"description": "A unique code assigned by Dun & Bradstreet to identify the classification of the marketing risk score.<br/>Refer to Reference code table \"238 [Marketing Risk Class]\" for all possible values."
+														}
+													},
+													"additionalProperties": true
+												}
+											},
+											"additionalProperties": true
+										}
+									}
+								}
+							}
+						}
+					},
+					"301": {
+						"description": "Moved Permanently",
+						"headers": {
+							"location": {
+								"description": "The URL to retrieve the D-U-N-S Number to which the requested D-U-N-S Number was transferred.",
+								"type": "string",
+								"x-example": "https://plus.dnb.com/v1/data/duns/{dunsNumber}?productId={productId}&versionId={versionId}"
+							}
+						},
+						"schema": {
+							"description": "",
+							"type": "object",
+							"properties": {
+								
+							}
+						}
+					}
+				},
+				"security": [],
+				"parameters": [
+					{
+						"in": "header",
+						"name": "Authorization",
+						"description": "The access token provided by authentication.",
+						"required": true,
+						"type": "string",
+						"x-example": "Bearer alphanumerictoken"
+					},
+					{
+						"in": "path",
+						"name": "dunsNumber",
+						"description": "A 9-character numeric string identifying the entity by its Dun & Bradstreet D-U-N-S number.",
+						"required": true,
+						"type": "string",
+						"x-example": "804735132"
+					},
+					{
+						"in": "query",
+						"name": "productId",
+						"description": "The product ID provided by Dun & Bradstreet that identifies the product to be returned.",
+						"required": true,
+						"type": "string",
+						"x-example": "cmpelk"
+					},
+					{
+						"in": "query",
+						"name": "versionId",
+						"description": "The version of the product to be returned.",
+						"required": true,
+						"type": "string",
+						"x-example": "v2"
+					},
+					{
+						"in": "query",
+						"name": "tradeUp",
+						"description": "Indicates if the Headquarters D-U-N-S Number should be returned if a Branch is requested.<br/><br/>Valid values:<br/>* hq: If the provided D-U-N-S Number is a Branch, the Headquarter D-U-N-S Number is returned.<br/>* domhq: If the provided D-U-N-S Number is a Branch, the Domestic Headquarter D-U-N-S Number is returned.<br/><br/>If the requested D-U-N-S Number is not a Branch, that D-U-N-S Number will be returned regardless of the value of this parameter.<br/><br/>If the parameter is omitted or contains an invalid value, the requested D-U-N-S Number is returned even if it is a Branch.",
+						"required": false,
+						"type": "string",
+						"x-example": "hq"
+					},
+					{
+						"in": "query",
+						"name": "customerReference",
+						"description": "Up to 240 characters for a reference string to be linked to the request in order to support subsequent order reconciliation.",
+						"required": false,
+						"type": "string",
+						"x-example": "customer reference text"
+					}
+				]
+			}
+		}
+	}
+}
